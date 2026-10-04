@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MindMetric — Student Mental Health Predictor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#predict-form">Skip to prediction form</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28">
+          <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2" opacity="0.35"/>
+          <path d="M8 18 L13 11 L17 16 L24 8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="24" cy="8" r="2.2" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="brand-name">MindMetric</span>
+        <span class="brand-sub">Student Mental Health Predictor</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="#predict-form">Predictor</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+    <a href="#predict-form">Predictor</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">Machine Learning · Student Wellness</p>
+        <h1>Understand your mental health score through your daily habits</h1>
+        <p class="hero-lede">An ML-powered system that estimates a student's mental health score using social-media habits, academic patterns, sleep, physical activity, and stress level.</p>
+        <a href="#predict-form" class="btn btn-primary btn-large" id="heroCta">
+          Start Prediction
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 440 440" class="hero-svg">
+          <defs>
+            <linearGradient id="gradLine" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#4C5FD7"/>
+              <stop offset="100%" stop-color="#9D7BEA"/>
+            </linearGradient>
+          </defs>
+          <circle cx="220" cy="220" r="170" fill="none" stroke="#E4E6F5" stroke-width="1.5"/>
+          <circle cx="220" cy="220" r="130" fill="none" stroke="#E4E6F5" stroke-width="1.5"/>
+          <circle cx="220" cy="220" r="90" fill="none" stroke="#E4E6F5" stroke-width="1.5"/>
+          <polyline points="80,300 140,230 190,260 250,150 310,190 370,110" fill="none" stroke="url(#gradLine)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="draw-line"/>
+          <g class="pulse-dots">
+            <circle cx="80" cy="300" r="5" fill="#4C5FD7"/>
+            <circle cx="140" cy="230" r="5" fill="#4C5FD7"/>
+            <circle cx="190" cy="260" r="5" fill="#8B5CF6"/>
+            <circle cx="250" cy="150" r="6" fill="#8B5CF6"/>
+            <circle cx="310" cy="190" r="5" fill="#4C5FD7"/>
+            <circle cx="370" cy="110" r="6" fill="#8B5CF6"/>
+          </g>
+          <text x="220" y="222" text-anchor="middle" class="hero-svg-label" font-size="15">daily habits</text>
+          <text x="220" y="242" text-anchor="middle" class="hero-svg-label-sub" font-size="12">→ mental health score</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREDICTION FORM -->
+  <section class="predict-section" id="predict-form">
+    <div class="section-inner">
+      <div class="predict-card">
+        <div class="predict-card-head">
+          <h2>Student Profile &amp; Daily Habits</h2>
+          <p>Answer a few questions about your routine. Takes about a minute.</p>
+        </div>
+
+        <form id="predictionForm" novalidate>
+
+          <!-- SECTION 01 -->
+          <fieldset class="form-section">
+            <div class="form-section-head">
+              <span class="form-section-number">01</span>
+              <div>
+                <h3>About you</h3>
+                <p>The basics — demographics and academic context.</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" min="10" max="100" value="20" required>
+                <span class="field-hint">10–100 years</span>
+                <span class="field-error" id="err-age" role="alert"></span>
+              </div>
+              <div class="field">
+                <label for="gender-group">Gender</label>
+                <div class="segmented" id="gender-group" role="radiogroup" aria-label="Gender">
+                  <button type="button" class="segmented-option is-active" data-value="Male" role="radio" aria-checked="true">Male</button>
+                  <button type="button" class="segmented-option" data-value="Female" role="radio" aria-checked="false">Female</button>
+                </div>
+                <input type="hidden" id="gender" name="gender" value="Male">
+              </div>
+              <div class="field">
+                <label for="country">Country</label>
+                <select id="country" name="country" required>
+                  <option value="India">India</option>
+                  <option value="USA">USA</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Australia">Australia</option>
+                  <option value="UK">UK</option>
+                  <option value="Germany">Germany</option>
+                  <option value="France">France</option>
+                  <option value="Mexico">Mexico</option>
+                  <option value="Turkey">Turkey</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="academic-group">Academic level</label>
+                <div class="segmented" id="academic-group" role="radiogroup" aria-label="Academic level">
+                  <button type="button" class="segmented-option" data-value="High School" role="radio" aria-checked="false">High School</button>
+                  <button type="button" class="segmented-option is-active" data-value="Undergraduate" role="radio" aria-checked="true">Undergraduate</button>
+                  <button type="button" class="segmented-option" data-value="Graduate" role="radio" aria-checked="false">Graduate</button>
+                </div>
+                <input type="hidden" id="academic_level" name="academic_level" value="Undergraduate">
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- SECTION 02 -->
+          <fieldset class="form-section">
+            <div class="form-section-head">
+              <span class="form-section-number">02</span>
+              <div>
+                <h3>Digital habits</h3>
+                <p>Tell us about your typical social-media usage.</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="field field-wide">
+                <label for="avg_daily_usage_hours">Average daily usage <span class="live-value" id="usageValue">5.2 hrs/day</span></label>
+                <input type="range" id="avg_daily_usage_hours" name="avg_daily_usage_hours" min="0" max="24" step="0.1" value="5.2">
+              </div>
+              <div class="field">
+                <label for="daily_unlocks">Daily phone unlocks</label>
+                <input type="number" id="daily_unlocks" name="daily_unlocks" min="0" value="82" required>
+                <span class="field-error" id="err-daily_unlocks" role="alert"></span>
+              </div>
+              <div class="field">
+                <label for="most_used_platform">Most used platform</label>
+                <select id="most_used_platform" name="most_used_platform" required>
+                  <option value="Instagram">Instagram</option>
+                  <option value="TikTok">TikTok</option>
+                  <option value="YouTube">YouTube</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="Snapchat">Snapchat</option>
+                  <option value="Twitter">Twitter</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="WeChat">WeChat</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="LINE">LINE</option>
+                  <option value="KakaoTalk">KakaoTalk</option>
+                  <option value="VKontakte">VKontakte</option>
+                </select>
+              </div>
+              <div class="field field-wide">
+                <label>Purpose of use</label>
+                <div class="card-select" id="purpose-group" role="radiogroup" aria-label="Purpose of use">
+                  <button type="button" class="card-option is-active" data-value="Entertainment" role="radio" aria-checked="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 7v10l9-5-9-5z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+                    Entertainment
+                  </button>
+                  <button type="button" class="card-option" data-value="Education" role="radio" aria-checked="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 6l9 4-9 4-9-4 9-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M6 12v5c0 1 2.5 2 6 2s6-1 6-2v-5" stroke="currentColor" stroke-width="1.8"/></svg>
+                    Education
+                  </button>
+                  <button type="button" class="card-option" data-value="Networking" role="radio" aria-checked="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="7" cy="8" r="2.5" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="8" r="2.5" stroke="currentColor" stroke-width="1.8"/><path d="M3 18c0-2.5 1.8-4 4-4s4 1.5 4 4M13 18c0-2.5 1.8-4 4-4s4 1.5 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    Networking
+                  </button>
+                  <button type="button" class="card-option" data-value="News" role="radio" aria-checked="false">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="14" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M7 9h10M7 12.5h10M7 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    News
+                  </button>
+                </div>
+                <input type="hidden" id="purpose_of_use" name="purpose_of_use" value="Entertainment">
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- SECTION 03 -->
+          <fieldset class="form-section">
+            <div class="form-section-head">
+              <span class="form-section-number">03</span>
+              <div>
+                <h3>Lifestyle</h3>
+                <p>Study, rest, and movement — the other side of the day.</p>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="field field-wide">
+                <label for="study_hours">Study hours <span class="live-value" id="studyValue">4.5 hrs/day</span></label>
+                <input type="range" id="study_hours" name="study_hours" min="0" max="24" step="0.1" value="4.5">
+              </div>
+              <div class="field field-wide">
+                <label for="sleep_hours_per_night">Sleep <span class="live-value" id="sleepValue">7.2 hrs/night</span></label>
+                <input type="range" id="sleep_hours_per_night" name="sleep_hours_per_night" min="0" max="24" step="0.1" value="7.2">
+              </div>
+              <div class="field field-wide">
+                <label for="physical_activity_hours">Physical activity <span class="live-value" id="activityValue">1.0 hr/day</span></label>
+                <input type="range" id="physical_activity_hours" name="physical_activity_hours" min="0" max="24" step="0.1" value="1.0">
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- SECTION 04 -->
+          <fieldset class="form-section">
+            <div class="form-section-head">
+              <span class="form-section-number">04</span>
+              <div>
+                <h3>Stress level</h3>
+                <p>How would you describe your day-to-day stress lately?</p>
+              </div>
+            </div>
+            <div class="stress-select" id="stress-group" role="radiogroup" aria-label="Stress level">
+              <button type="button" class="stress-option" data-value="Low" role="radio" aria-checked="false">Low</button>
+              <button type="button" class="stress-option is-active" data-value="Medium" role="radio" aria-checked="true">Medium</button>
+              <button type="button" class="stress-option" data-value="High" role="radio" aria-checked="false">High</button>
+              <button type="button" class="stress-option" data-value="Very High" role="radio" aria-checked="false">Very High</button>
+            </div>
+            <input type="hidden" id="stress_level" name="stress_level" value="Medium">
+          </fieldset>
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary btn-large" id="predictBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 17l4-6 4 3 4-8 6 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span id="predictBtnLabel">Predict Mental Health Score</span>
+            </button>
+            <p class="api-error" id="apiError" role="alert" hidden></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREDICTION RESULT -->
+  <section class="result-section" id="result-section" hidden>
+    <div class="section-inner">
+      <div class="result-card">
+        <h2>Your predicted mental health score</h2>
+
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 240 240" class="gauge-svg">
+            <circle cx="120" cy="120" r="100" fill="none" stroke="#ECEEFA" stroke-width="16"/>
+            <circle cx="120" cy="120" r="100" fill="none" stroke="url(#gaugeGrad)" stroke-width="16" stroke-linecap="round"
+              id="gaugeArc" stroke-dasharray="628" stroke-dashoffset="628" transform="rotate(-90 120 120)"/>
+            <defs>
+              <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#4C5FD7"/>
+                <stop offset="100%" stop-color="#8B5CF6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="gauge-center">
+            <span class="gauge-score" id="gaugeScore">0.0</span>
+            <span class="gauge-out-of">out of 10</span>
+          </div>
+        </div>
+
+        <p class="gauge-caption">Predicted Score</p>
+
+        <div class="score-scale">
+          <div class="score-scale-track">
+            <div class="score-scale-marker" id="scoreMarker"></div>
+          </div>
+          <div class="score-scale-labels">
+            <span>Lower estimate · 3</span>
+            <span>Higher estimate · 10</span>
+          </div>
+        </div>
+
+        <div class="result-description">
+          <p class="result-description-label">Machine-Learning Estimate</p>
+          <p>This score is an estimate generated from patterns learned from student lifestyle and social-media data.</p>
+        </div>
+
+        <div class="profile-block">
+          <h3>Your prediction profile</h3>
+          <div class="profile-grid" id="profileGrid"></div>
+        </div>
+
+        <div class="insights-block">
+          <h3>Your lifestyle snapshot</h3>
+          <div class="insights-grid" id="insightsGrid"></div>
+        </div>
+
+        <div class="result-actions">
+          <button type="button" class="btn btn-secondary" id="editInputsBtn">Edit Inputs</button>
+          <button type="button" class="btn btn-ghost" id="resetBtn">Reset</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how-it-works">
+    <div class="section-inner">
+      <h2>How it works</h2>
+      <p class="how-lede">The system processes the information you provide and uses a trained machine-learning model to generate an estimated mental health score.</p>
+      <div class="how-steps">
+        <div class="how-step">
+          <span class="how-step-number">01</span>
+          <h3>Your information</h3>
+          <p>You share your habits — academics, social media, sleep, and activity.</p>
+        </div>
+        <div class="how-step-connector" aria-hidden="true"></div>
+        <div class="how-step">
+          <span class="how-step-number">02</span>
+          <h3>Data processing</h3>
+          <p>Your answers are structured into the format the prediction system expects.</p>
+        </div>
+        <div class="how-step-connector" aria-hidden="true"></div>
+        <div class="how-step">
+          <span class="how-step-number">03</span>
+          <h3>Machine learning</h3>
+          <p>A trained model analyzes the patterns in your inputs.</p>
+        </div>
+        <div class="how-step-connector" aria-hidden="true"></div>
+        <div class="how-step">
+          <span class="how-step-number">04</span>
+          <h3>Predicted score</h3>
+          <p>You receive an estimated mental health score, out of 10.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATASET INFO / ABOUT -->
+  <section class="dataset-section" id="about">
+    <div class="section-inner">
+      <div class="dataset-grid">
+        <div class="dataset-stat">
+          <span class="dataset-number">5,000+</span>
+          <span class="dataset-label">Student records</span>
+        </div>
+        <div class="dataset-stat">
+          <span class="dataset-number">Lifestyle</span>
+          <span class="dataset-label">Social media</span>
+        </div>
+        <div class="dataset-stat">
+          <span class="dataset-number">Academic</span>
+          <span class="dataset-label">Patterns</span>
+        </div>
+        <div class="dataset-stat">
+          <span class="dataset-number">Mental Health</span>
+          <span class="dataset-label">Score prediction</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="section-inner footer-inner">
+    <p class="footer-brand">MindMetric — Student Mental Health Predictor</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

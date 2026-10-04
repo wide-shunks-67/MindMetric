@@ -180,5 +180,4 @@ MindMetric provides a machine-learning-based estimate for educational and demons
 ## Author
 
 **Ansh Tayal**
-2nd-year B.Tech CSE (AI) student, CSVTU Bhilai
-GitHub: [@wide-shunks-67](https://github.com/wide-shunks-67)
+

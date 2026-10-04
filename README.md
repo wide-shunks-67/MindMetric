@@ -4,8 +4,8 @@
 
 MindMetric takes a student's social-media usage, study routine, sleep, physical activity, and stress level, and returns an ML-generated wellness estimate — presented through a premium, from-scratch frontend with zero UI frameworks.
 
-🔗 **Live demo:** [add your Vercel URL here]
-🔗 **API:** [add your Render URL here]
+🔗 **Live demo:** [https://mindmetric-frontend-henna.vercel.app/]
+🔗 **API:** [https://mindmetric-r2fo.onrender.com/]
 
 ---
 
